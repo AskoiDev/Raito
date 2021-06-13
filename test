@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+EXISTS=""
+DIR=".test"
+
+# Check for `deno` in PATH
+if ! command -v deno &> /dev/null ; then
+    printf "(\033[1;31mError\033[1;0m): Deno not found on your machine\n"
+    printf "(\033[1;31mError\033[1;0m): Please install Deno and set the PATH correctly\n"
+    printf "(\033[1;31mError\033[1;0m): Try again later\n"
+    printf "(\033[1;31mError\033[1;0m): Aborting request due to error...\n"
+    exit
+fi
+
+# The test function
+deno_test() {
+    clear
+    deno test -qA $DIR
+
+    printf "(\033[1;32mInfo\033[1;0m): Test completed\n"
+    exit
+}
+
+# Check for the `.test` directory
+if test -d $DIR ; then
+    EXISTS="true"
+else
+    EXISTS="false"
+    EMPTY="true"
+fi
+
+# Check if the directory exists and not empty
+if [ "$EXISTS" == "true" ] && [ "$(ls -A $DIR)" ] ; then
+    printf "(\033[1;32mInfo\033[1;0m): Running tests...\n"
+    sleep 0.5
+
+    # Run the function
+    deno_test
+else
+    printf "(\033[1;31mError\033[1;0m): Build failed\n"
+    printf "(\033[1;31mError\033[1;0m): Aborting request due to error...\n"
+    exit
+fi

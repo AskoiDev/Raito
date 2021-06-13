@@ -5,6 +5,8 @@ export function lexer(input: string): Tokens[] | void{
 
     const NEWLINE = /\n/;
     const WHITESPACE = /\s/;
+    const NUMBERS = /[0-9]/;
+    const LETTERS = /[a-zA-Z]/;
 
     let count = 0;
     let now = '';
@@ -203,6 +205,52 @@ export function lexer(input: string): Tokens[] | void{
             default: {
                 if (WHITESPACE.test(now) || NEWLINE.test(now)) {
                     count += 1;
+                }
+
+                else if (NUMBERS.test(now)) {
+                    let value = '';
+
+                    while (NUMBERS.test(now)) {
+                        value += now
+                        count += 1;
+                        now = input[count];
+                    }
+
+                    tokens.push(['Number', value]);
+                }
+
+                else if (LETTERS.test(now) || now === '_') {
+                    let value = now;
+                    count += 1;
+
+                    if (count < input.length) {
+                        now = input[count];
+
+                        while ((LETTERS.test(now) || NUMBERS.test(now) || now === '_') && ((count + 1) <= input.length)) {
+                            value += now;
+                            count += 1;
+                            now = input[count];
+                        }
+                    }
+
+                    tokens.push(['Word', value]);
+                }
+
+                else if (now === '\'' || now === '"') {
+                    const quote = now;
+                    let value = '';
+                    count += 1;
+                    now = input[count];
+
+                    while (now !== quote) {
+                        value += now;
+                        count += 1;
+                        now = input[count];
+                    }
+
+                    count += 1;
+                    now = input[count];
+                    tokens.push(['String', value]);
                 }
 
                 else return console.error('[Raito(Lexer)]: Unknown token: ' + now)

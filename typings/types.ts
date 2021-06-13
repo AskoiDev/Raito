@@ -57,7 +57,7 @@ export enum TokenType {
     Comma = Token[','],
     More = Token['>'],
     Question = Token['?'],
-    FowardSlash = Token['/']
+    FowardSlash = Token['/'],
 }
 
 export type Tokens = [TokenType | string, string];

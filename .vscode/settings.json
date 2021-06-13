@@ -1,3 +1,4 @@
 {
+    // Ignore C/++ errors becuse why not
     "C_Cpp.errorSquiggles": "Disabled"
 }

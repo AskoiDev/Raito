@@ -1,6 +1,6 @@
 import { TokenType, Tokens } from '../mod.ts';
 
-export function lexer(input: string): Tokens[] | void{
+export function lexer(input: string): Tokens[] | void {
     const tokens: Tokens[] = [];
 
     const NEWLINE = /\n/;

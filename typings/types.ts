@@ -61,3 +61,18 @@ export enum TokenType {
 }
 
 export type Tokens = [TokenType | string, string];
+
+export interface AST {
+    type: 'Program';
+    body: (Node | Parsed)[];
+}
+
+export interface Node {
+    type: string;
+    body: (Node | Parsed)[];
+}
+
+export interface Parsed {
+    type: string;
+    value: string;
+}

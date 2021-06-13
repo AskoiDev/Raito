@@ -1,9 +1,13 @@
 import { lexer } from '../src/mod.ts';
 
-Deno.test('Lexer', () => console.log('\n', lexer(
-    `/* multiline
-    comment */
-    !@#$%^&*()-+={}
-    // comment
-    []|:;<>,.?/~\``
-)));
+Deno.test('Lexer', () => {
+    console.log(
+        lexer(
+            `/* multiline
+            comment */
+            !@#$%^&*()-+={}
+            // comment
+            []|:;<>,.?/~\``
+        )
+    );
+});

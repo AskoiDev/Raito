@@ -1,6 +1,6 @@
 import { TokenType, Tokens } from '../mod.ts';
 
-export function lexer(input: string): Tokens[] {
+export function lexer(input: string): Tokens[] | void{
     const tokens: Tokens[] = [];
 
     const NEWLINE = /\n/;
@@ -204,6 +204,8 @@ export function lexer(input: string): Tokens[] {
                 if (WHITESPACE.test(now) || NEWLINE.test(now)) {
                     count += 1;
                 }
+
+                else return console.error('[Raito(Lexer)]: Unknown token: ' + now)
             }
         }
     }

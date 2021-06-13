@@ -1,2 +1,2 @@
 # Raito
-💡 A simple and light language
+💡 A [C/C++](https://www.cprogramming.com) compiler written in TypeScript
